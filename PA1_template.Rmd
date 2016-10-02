@@ -90,7 +90,9 @@ For all data points with NA steps, impute the average number of steps for that i
 
 ```{r }
 meanStepsPerInterval$interval <- as.integer(meanStepsPerInterval$interval)
+
 read_data.filledIn <- merge(read_data, meanStepsPerInterval, by = "interval")
+
 read_data.filledIn$steps[is.na(read_data.filledIn$steps)] <- read_data.filledIn$meanStepsPerInterval
       [is.na(read_data.filledIn$steps)]
 ```
@@ -100,7 +102,9 @@ Calculate and plot a histogram of the numbers of steps per day using the newly c
 ```{r, message=FALSE, warning=FALSE}
 sumByDay.filledIn <- as.data.frame(tapply(read_data.filledIn$steps, 
       as.factor(read_data.filledIn$date), sum))
+
 names(sumByDay.filledIn) <- c("Steps")
+
 qplot(sumByDay.filledIn$Steps, geom = "histogram", ylab = "Number of Days", 
       xlab = "Number of Steps", binwidth = 200)
 ```
@@ -127,6 +131,7 @@ Calculate the steps per interval averaged across day type ("weekday" or "weekend
 
 ```{r }
 averages <- aggregate(steps ~ interval + dtype, data = read_data.filledIn, mean)
+
 ggplot(averages, aes(interval, steps)) + geom_line(colour = "green") + facet_grid(dtype ~ .) 
       + xlab("Interval (5 minutes)") + ylab("Average Steps")
 ```
