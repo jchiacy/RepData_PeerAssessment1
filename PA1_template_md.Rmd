@@ -1,8 +1,6 @@
 ---
-title: "PA1_template"
-author: "JChia"
-date: "29 Sep, 2016"
-output: html_document
+title: "PA1_template.md"
+output: github_document
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
