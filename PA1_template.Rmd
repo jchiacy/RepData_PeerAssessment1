@@ -38,6 +38,7 @@ Calculate the number of steps taken per day
 ```{r message=FALSE, warning=FALSE, results='hide'}
 total_steps <- aggregate(read_data$steps, by = list(read_data$date), sum, 
 na.rm = TRUE)
+
 names(total_steps) <- c("Date", "Steps")
 ```
 
@@ -62,8 +63,11 @@ Calculate the steps per interval averaged across all days and plot the results
 ```{r }
 meanStepsPerInterval <- tapply(read_data_removeNA$steps, 
       as.factor(read_data_removeNA$interval), mean)
+      
 meanStepsPerInterval <- as.data.frame(meanStepsPerInterval)
+
 meanStepsPerInterval$interval <- rownames(meanStepsPerInterval)
+
 plot(meanStepsPerInterval$interval, meanStepsPerInterval$mean, 
       type = 'l', ylab = "Mean Steps", xlab = "Interval")
 ```
